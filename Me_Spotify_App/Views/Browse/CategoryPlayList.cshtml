@@ -1,0 +1,62 @@
+﻿@model Me_Spotify_App.ViewModels.BrowseViewModel
+@{
+    ViewBag.Title = "CategoryPlayList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{Html.RenderPartial("_SpotifyNavBar", Model.AuthModel);}
+
+<h2>Category PlayList</h2>
+
+
+<div class="containerContent">
+    <div class="row">
+        <div class="col-3">
+            @{Html.RenderPartial("_SearchBox", Model);}
+        </div>
+        <div class="col-9">
+            <div style="height:40em;width:80em;overflow:auto;padding-left:1em; padding-right:1em;">
+                <div class="card text-white bg-dark mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach (var playList in Model.CategoryPlayLists)
+                            {
+                                <div class="col-3">
+                                    <div class="card text-white bg-success mb-3">
+                                        @if (playList.Images.Count > 0)
+                                        {
+                                            <img class="card-img-top" src="@playList.Images[0].Url" alt="Card image cap">
+                                        }
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                @Html.ActionLink(playList.Name, "Index", "PlayList", new
+                                                {playListId = playList.Id,
+                                                tokenTime = Model.AuthModel.TokenTimeGeneration,
+                                                TokenGiven = Model.AuthModel.TokenGiven}, new { })
+                                            </h5>
+                                            <hr />
+                                            @Html.DisplayNameFor(modelItem => playList.Owner.DisplayName) :
+                                            @Html.DisplayFor(modelItem => playList.Owner.DisplayName)
+                                            <hr />
+                                            @Html.DisplayNameFor(modelItem => playList.Description) :
+                                            @Html.DisplayFor(modelItem => playList.Description)
+                                            <hr />
+                                            @Html.DisplayNameFor(modelItem => playList.Public) :
+                                            @Html.DisplayFor(modelItem => playList.Public)
+                                            <hr />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

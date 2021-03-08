@@ -1,0 +1,145 @@
+﻿@model Me_Spotify_App.ViewModels.BrowseViewModel
+
+@{
+    ViewBag.Title = "GetSearchedValues";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{Html.RenderPartial("_SpotifyNavBar", Model.AuthModel);}
+
+<h2>GetSearchedValues</h2>
+
+<div class="containerContent">
+    <div class="row">
+        <div class="col-3">
+            @{Html.RenderPartial("_SearchBox", Model);}
+        </div>
+        <div class="col-9">
+            <div style="height:30em;width:35em;overflow:auto;padding-left:1em; padding-right:1em;">
+                <div class="card text-white bg-success mb-3">
+                    <h5>Artists result</h5><br />
+                    <div class="row">
+                        @if (Model.SearchResponseModel.Artists != null)
+                        {
+
+                            foreach (var artist in Model.SearchResponseModel.Artists)
+                            {
+                                <div class="col-6">
+                                    <div class="card text-white bg-dark mb-3">
+                                        @if (artist.Images.Count > 0)
+                                        {
+                                            <img class="card-img-top" src="@artist.Images[0].Url" alt="Card image cap">
+                                        }
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                @Html.ActionLink(artist.Name, "Details", "Artist", new
+                                           {
+                                               artistId = artist.Id,
+                                               tokenTime = Model.AuthModel.TokenTimeGeneration,
+                                               TokenGiven = Model.AuthModel.TokenGiven
+                                           }, new { })
+                                            </h5>
+                                            @Html.DisplayNameFor(modelItem => artist.Followers) :
+                                            @Html.DisplayFor(modelItem => artist.Followers.Total)
+                                            <hr />
+                                            @Html.DisplayNameFor(modelItem => artist.Popularity) :
+                                            @Html.DisplayFor(modelItem => artist.Popularity)
+                                            <hr />
+                                            @Html.DisplayNameFor(modelItem => artist.Type) :
+                                            @Html.DisplayFor(modelItem => artist.Type)
+                                            <hr />
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-6">
+            <div style="height:40em;width:50em;overflow:auto;padding-left:1em; padding-right:1em;">
+                <div class="card text-white bg-success mb-3">
+                    <h5>Albums result</h5><br />
+                    <div class="row">
+                        @if (Model.SearchResponseModel.Albums != null)
+                        {
+                            foreach (var album in Model.SearchResponseModel.Albums)
+                            {
+                                <div class="col-4">
+                                    <div class="card text-white bg-info mb-3">
+                                        @if (album.Images.Count > 0)
+                                        {
+                                            <img class="card-img-top" src="@album.Images[0].Url" alt="Card image cap">
+                                        }
+                                        <h5 class="card-title">@album.Name</h5>
+                                        <div class="card-body">
+                                            @Html.DisplayNameFor(modelItem => album.ReleaseDate) :
+                                            @Html.DisplayFor(modelItem => album.ReleaseDate)
+                                            <hr />
+                                            @Html.DisplayNameFor(modelItem => album.AlbumGroup) :
+                                            @Html.DisplayFor(modelItem => album.AlbumGroup)
+                                            <hr />
+                                            @Html.DisplayNameFor(modelItem => album.AlbumType) :
+                                            @Html.DisplayFor(modelItem => album.AlbumType)
+                                            <hr />
+                                        </div>
+                                    </div>
+                                    <br />
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                </div>
+            </div>
+        <div class="col-6">
+            <div style="height:40em;width:50em;overflow:auto;padding-left:1em; padding-right:1em;">
+                <div class="card text-white bg-success mb-3">
+                    <h5>Tracks result</h5><br />
+                    <div class="row">
+                        @if (Model.SearchResponseModel.Tracks != null)
+                        {
+                            foreach (var track in Model.SearchResponseModel.Tracks)
+                            {
+                                <div class="col-4">
+                                    <div class="card text-white bg-dark mb-3">
+                                        @if (track.Album.Images.Count > 0)
+                                        {
+                                            <img class="card-img-top" src="@track.Album.Images[0].Url" alt="Card image cap">
+                                        }
+                                        <h5 class="card-title">
+                                            @Html.ActionLink(track.Name, "Details", "Tracks", new
+                                            {
+                                                trackId = track.Id,
+                                                tokenTime = Model.AuthModel.TokenTimeGeneration,
+                                            TokenGiven = Model.AuthModel.TokenGiven
+                                            }, new { })
+                                        </h5>
+                                        <hr />
+                                        @Html.DisplayNameFor(modelItem => track.Album.Name) :
+                                        @Html.DisplayFor(modelItem => track.Album.Name)
+                                        <hr />
+                                        @Html.DisplayNameFor(modelItem => track.Popularity) :
+                                        @Html.DisplayFor(modelItem => track.Popularity)
+                                        <hr />
+                                        @Html.DisplayNameFor(modelItem => track.Explicit) :
+                                        @Html.DisplayFor(modelItem => track.Explicit)
+                                        <hr />
+                                        @Html.DisplayNameFor(modelItem => track.DurationMinutes) :
+                                        @Html.DisplayFor(modelItem => track.DurationMinutes)
+                                    </div>
+                                    <br />
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                </div>
+            </div>
+    </div>
+</div>
