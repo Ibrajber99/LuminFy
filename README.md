@@ -9,6 +9,9 @@ Spotify App using the Spotify API.
 
 https://developer.spotify.com/documentation/web-api/
 
+## Library that is used as the client to simplify fetchng data form the API
+https://johnnycrazy.github.io/SpotifyAPI-NET/docs/next/introduction
+
 # Packages
 
  1-SpotifyApi.Web  
