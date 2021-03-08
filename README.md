@@ -20,6 +20,9 @@ https://johnnycrazy.github.io/SpotifyAPI-NET/docs/next/introduction
  4-AutoMapper  
  5-AutoFac.MVC5  
  
+ # Website Sample
+ https://luminfy.azurewebsites.net
+ 
 
 ## Sample Images
 
