@@ -14,13 +14,13 @@ namespace Me_Spotify_App.API_CLIENT
     public static class ApiClientConfig
     {
         //Client ID code goes here
-        public const string CLIENT_ID = "bb36044f469e4e9c85781ac576e79473";
+        public const string CLIENT_ID = "";
 
         //Client secret code goes here
-        public const string CLIENT_SECRET = "fdafbcd6ed6b4d1dbf3aeeda774f9ba1";
+        public const string CLIENT_SECRET = "";
 
         //Application URL path + /callback/
-        public const string CallBackURI = "https://localhost:44384/SpotifyUser/callback/";
+        public const string CallBackURI = "";
 
 
         public static Uri GetRedirectionUriPath()
