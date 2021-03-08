@@ -9,12 +9,12 @@ Spotify App using the Spotify API.
 
 https://developer.spotify.com/documentation/web-api/
 
-# Pakcages
+# Packages
 
-## 1-SpotifyApi.Web
-## 2-SpotiyApi.Web.Auth
-## 3-AutoFac
-## 4-AutoMapper
-## 5-AutoFac.MVC5
-
+ 1-SpotifyApi.Web  
+ 2-SpotiyApi.Web.Auth  
+ 3-AutoFac  
+ 4-AutoMapper  
+ 5-AutoFac.MVC5  
+ 
 
