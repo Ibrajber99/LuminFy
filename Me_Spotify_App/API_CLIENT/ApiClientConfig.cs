@@ -20,6 +20,7 @@ namespace Me_Spotify_App.API_CLIENT
         public const string CLIENT_SECRET = "";
 
         //Application URL path + /callback/
+        //URL needs to be registered at the dashboard in Spotify 
         public const string CallBackURI = "";
 
 
