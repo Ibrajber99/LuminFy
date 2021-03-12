@@ -1,9 +1,6 @@
-﻿using SpotifyAPI.Web;
+using SpotifyAPI.Web;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 /// <summary>
 /// Class for Playlist data
@@ -20,9 +17,9 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Playlist
 
                 return playList;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
+                throw new Exception(ex.Message);
             }
         }
     }
