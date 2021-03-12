@@ -1,9 +1,7 @@
-﻿using SpotifyAPI.Web;
+using SpotifyAPI.Web;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
+
 
 /// <summary>
 /// Class for basic Player management
@@ -20,10 +18,9 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Player
                 var addToQueue = await client.Player.AddToQueue(request);
                 return addToQueue;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return false;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -34,10 +31,9 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Player
                 var device = await client.Player.GetAvailableDevices();
                 return device;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -50,10 +46,9 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Player
 
                 return currentPlaying;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -64,10 +59,9 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Player
                 var pauseCurrent = await client.Player.PausePlayback();
                 return pauseCurrent;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return false;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -78,10 +72,9 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Player
                 var resumeCurrent = await client.Player.ResumePlayback();
                 return resumeCurrent;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return false;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -92,10 +85,9 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Player
                 var skipNext = await client.Player.SkipNext();
                 return skipNext;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return false;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -106,10 +98,9 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Player
                 var skipPrev = await client.Player.SkipPrevious();
                 return skipPrev;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return false;
+                throw new Exception(ex.Message);
             }
         }
     }
