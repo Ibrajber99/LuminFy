@@ -1,10 +1,9 @@
-﻿using Me_Spotify_App.Models.Browse_Related;
 using SpotifyAPI.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
+
 
 /// <summary>
 /// Class for Browsing data
@@ -24,8 +23,7 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Browse
             }
             catch (Exception ex)
             {
-
-                return null;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -41,10 +39,9 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Browse
 
                 return res;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -57,10 +54,9 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Browse
 
                 return res;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -75,10 +71,9 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Browse
 
                 return searchRes;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                throw new Exception(ex.Message);
             }
         }
 
