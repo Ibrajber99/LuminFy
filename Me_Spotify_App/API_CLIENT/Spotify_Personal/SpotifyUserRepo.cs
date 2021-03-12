@@ -1,9 +1,9 @@
-﻿using SpotifyAPI.Web;
+using SpotifyAPI.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
+
 
 /// <summary>
 /// Class for User data
@@ -24,9 +24,9 @@ namespace Me_Spotify_App.API_CLIENT
                 var userInfo = client.UserProfile.Current();
                 return await userInfo;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -37,10 +37,9 @@ namespace Me_Spotify_App.API_CLIENT
                 var publicUserProfile = client.UserProfile.Get(id);
                 return await publicUserProfile;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -52,10 +51,9 @@ namespace Me_Spotify_App.API_CLIENT
 
                 return  publicUserPlayLists.Items.ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -67,10 +65,9 @@ namespace Me_Spotify_App.API_CLIENT
 
                 return playLists.Items.ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -84,10 +81,9 @@ namespace Me_Spotify_App.API_CLIENT
 
                 return userPlayListsList;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                throw new Exception(ex.Message);
             }
 
         }
@@ -102,10 +98,9 @@ namespace Me_Spotify_App.API_CLIENT
 
                 return userTopArtistsList;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -119,10 +114,9 @@ namespace Me_Spotify_App.API_CLIENT
 
                 return tracksList;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                throw new Exception(ex.Message);
             }
         }
     }
