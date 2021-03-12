@@ -1,9 +1,8 @@
-﻿using SpotifyAPI.Web;
+using SpotifyAPI.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 /// <summary>
 /// Class for artist related data
@@ -20,10 +19,9 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Artist
 
                 return await artist;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -35,10 +33,10 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Artist
 
                 return artistAlbums.Items.ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                return null;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -54,10 +52,10 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Artist
                 return artistTopTracks.Tracks;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                return null;
+                throw new Exception(ex.Message);
             }
            
         }
