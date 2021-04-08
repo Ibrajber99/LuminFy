@@ -1,4 +1,4 @@
-using SpotifyAPI.Web;
+﻿using SpotifyAPI.Web;
 using System;
 using System.Threading.Tasks;
 
@@ -29,6 +29,7 @@ namespace Me_Spotify_App.API_CLIENT.Spotify_Tracks
             try
             {
                 var trackAlbum = client.Albums.Get(albumId);
+
 
                 return await trackAlbum;
             }

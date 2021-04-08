@@ -52,7 +52,7 @@
                                 <h5 class="card-title">Media Player</h5>
                                 @if (Model.CurrentDevices.Devices.Count > 0)
                                 {
-                                    if (Model.CurrentDevices.Devices.All(d => d.IsActive))
+                                    if (Model.CurrentDevices.Devices.Any(d => d.IsActive))
                                     {
                                         <div class="col-md-12 text-center">
 

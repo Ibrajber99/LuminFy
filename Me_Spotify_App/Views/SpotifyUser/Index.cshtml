@@ -52,7 +52,7 @@
                                 <h5 class="card-title">Media Player</h5>
                                 @if (Model.CurrentDevices.Devices.Count > 0)
                                 {
-                                    if (Model.CurrentDevices.Devices.All(d => d.IsActive))
+                                    if (Model.CurrentDevices.Devices.Any(d => d.IsActive))
                                     {
                                         <div class="col-md-12 text-center">
 
@@ -143,10 +143,14 @@
                                         <img class="card-img-top" src="@playList.Images[0].Url" alt="Card image cap">
                                     }
                                 <div class="card-body">
-                                    @Html.ActionLink(playList.Name, "Index", "PlayList", new
-                                    { playListId = playList.Id,
-                                    tokenTime = Model.AuthModel.TokenTimeGeneration,
-                                    TokenGiven = Model.AuthModel.TokenGiven }, new { })
+                                    @*@if (!string.IsNullOrEmpty(playList.Name)) {*@
+                                        @Html.ActionLink(
+                                       string.IsNullOrEmpty(playList.Name) ? "Not found" : playList.Name,
+                                            "Index", "PlayList", new
+                                            { playListId = playList.Id,
+                                            tokenTime = Model.AuthModel.TokenTimeGeneration,
+                                            TokenGiven = Model.AuthModel.TokenGiven }, new { })
+                                    @*}*@
                                     <hr />
                                     @Html.ActionLink(playList.Owner.DisplayName, "GetPublicUserProfile", "SpotifyUser", new
                                     {

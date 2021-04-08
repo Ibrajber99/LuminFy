@@ -12,13 +12,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using static SpotifyAPI.Web.PlayerCurrentlyPlayingRequest;
 
 /// <summary>
-/// Controlelr for logged in user data
+/// Controller for logged in user data
 /// Control player(PAUSE,PLAY,NEXT,PREV)
 /// </summary>
 namespace Me_Spotify_App.Controllers

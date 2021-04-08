@@ -1,4 +1,4 @@
-using SpotifyAPI.Web;
+﻿using SpotifyAPI.Web;
 using System;
 using System.Threading.Tasks;
 

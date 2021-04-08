@@ -51,7 +51,9 @@
                                     <img class="card-img-top" src="@playList.Images[0].Url" alt="Card image cap">
                                 }
                                 <div class="card-body">
-                                    <h5 class="card-title"> @Html.ActionLink(playList.Name, "Index", "PlayList", new
+                                    <h5 class="card-title"> @Html.ActionLink(
+                                     string.IsNullOrEmpty(playList.Name) ? "Not found" : playList.Name,
+                                     "Index", "PlayList", new
                                      {playListId = playList.Id,
                                      tokenTime = Model.Authmodel.TokenTimeGeneration,
                                      TokenGiven = Model.Authmodel.TokenGiven}, new { }) </h5>
