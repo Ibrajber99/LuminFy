@@ -3,6 +3,7 @@ Spotify App using the Spotify API.
 
 ## Fixes  
     -Added a cookie system to hold the user's token, initially it was restored in a model and getting passed in the url(not a good practice and more vulnerability)
+    -All instances are injected (lower coupling)
     -New UI design (Not responsive)
   
 
