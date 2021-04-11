@@ -1,0 +1,76 @@
+﻿@model Me_Spotify_App.ViewModels.BrowseViewModel
+@{
+    ViewBag.Title = "CategoryPlayList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="https://cdn.boomcdn.com/libs/owl-carousel/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" type="text/css">
+
+
+<h2 class="display-4 font-weight text-center text-light">Category PlayList</h2>
+
+
+<div class="containerContent">
+    <div class="row">
+        <div class="col-3">
+            @{Html.RenderPartial("_SearchBox", Model);}
+        </div>
+        <div class="col-9">
+            <div class="owl-carousel">
+                @foreach (var playList in Model.CategoryPlayLists)
+                {
+                    <div class="card text-white bg-success mb-3">
+                        @if (playList.Images.Count > 0)
+                        {
+                            <img class="card-img-bottom" style="height:230px;" src="@playList.Images[0].Url" alt="Card image cap">
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                @Html.ActionLink(playList.Name, "Index", "PlayList", new
+                                { playListId = playList.Id }, new { })
+                            </h5>
+                            <hr />
+                            @Html.DisplayNameFor(modelItem => playList.Public) :
+                            @Html.DisplayFor(modelItem => playList.Public)
+                            <hr />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>
+<style>
+    .owl-nav {
+        text-align: center;
+    }
+</style>
+
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 15,
+        nav: true,
+        autoplay: true,
+        autoplayTimeout: 2000,
+        autoplayHoverPause: true,
+        responsive: {
+            0: {
+                items: 2
+            },
+            600: {
+                items: 4
+            },
+            1000: {
+                items: 6
+            }
+        }
+    })
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

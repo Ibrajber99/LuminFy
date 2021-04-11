@@ -1,0 +1,93 @@
+﻿@model Me_Spotify_App.ViewModels.FullTrackViewModel
+
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{Html.RenderPartial("_SpotifyNavBar", Model.AuthModel);}
+
+<h2>Details</h2>
+<div class="containerContent">
+    <div class="row">
+        <div class="col-6">
+            <div class="card text-white bg-success mb-3" style="width: 50rem;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            @if (Model.TrackModel.Album.Images.Count > 0)
+                            {
+                                <img class="card-img-top" src="@Model.TrackModel.Album.Images[0].Url" alt="Card image cap">
+                            }
+                        </div>
+                        <div class="col-4">
+                            <h5 class="card-title">@Model.TrackModel.Name</h5>
+                            @foreach (var artist in Model.TrackModel.Artists)
+                            {
+                                @Html.DisplayFor(item => artist.Name)<br />
+                            }
+                            <hr />
+                            @Html.DisplayNameFor(Model => Model.TrackModel.Album.Name) :
+                            @Html.DisplayFor(Model => Model.TrackModel.Album.Name)
+                            <hr />
+                            @Html.DisplayNameFor(Model => Model.TrackModel.Popularity) :
+                            @Html.DisplayFor(Model => Model.TrackModel.Popularity)
+                            <hr />
+                            @Html.DisplayNameFor(Model => Model.TrackModel.Explicit) :
+                            @Html.DisplayFor(Model => Model.TrackModel.Explicit)
+                            <hr />
+                            @Html.DisplayNameFor(Model => Model.TrackModel.DurationMinutes) :
+                            @Html.DisplayFor(Model => Model.TrackModel.DurationMinutes)
+                        </div>
+                        <div class="col-4">
+                            @Html.DisplayNameFor(Model => Model.TrackModel.TrackNumber) :
+                            @Html.DisplayFor(Model => Model.TrackModel.TrackNumber)
+                            <hr />
+                            <a href="@Model.TrackModel.Uri">Play on app</a>
+                            <hr />
+                            @Html.DisplayNameFor(Model => Model.TrackModel.DiscNumber) :
+                            @Html.DisplayFor(Model => Model.TrackModel.DiscNumber)
+                        </div>
+                    </div>
+                    <hr />
+                    <h5>@Model.AlbumModel.Copyrights[0].Text</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card text-white bg-dark mb-3" style="padding-left:1em;padding-right:1em;padding-top:1em;">
+                <h5 class="card-title">More from: @Model.TrackModel.Album.Name</h5>
+                <div class="card-body">
+                    @Html.DisplayNameFor(Model => Model.AlbumModel.ReleaseDate) :
+                    @Html.DisplayFor(Model => Model.AlbumModel.ReleaseDate)
+                    <hr />
+                    @Html.DisplayNameFor(Model => Model.AlbumModel.Label) :
+                    @Html.DisplayFor(Model => Model.AlbumModel.Label)
+                    <hr />
+                    <div class="row">
+                        @foreach (var tracks in Model.AlbumModel.Tracks)
+                        {
+                            <div class="col-3">
+                                <div class="card text-white bg-warning mb-3" style="width:10em;height:10em; margin-bottom:1em;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            @Html.ActionLink(tracks.Name, "Details", "Tracks", new
+                                        {
+                                                trackId = tracks.Id,
+                                                tokenTime = Model.AuthModel.TokenTimeGeneration,
+                                           TokenGiven = Model.AuthModel.TokenGiven
+                                            }, new { })
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

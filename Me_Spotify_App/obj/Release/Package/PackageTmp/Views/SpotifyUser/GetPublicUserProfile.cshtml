@@ -1,0 +1,83 @@
+﻿@model Me_Spotify_App.ViewModels.PublicUserViewModel
+
+@{
+    ViewBag.Title = "GetPublicUserProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{Html.RenderPartial("_SpotifyNavBar", Model.Authmodel);}
+
+<h2 class="text-light" style="text-align:center;">User Profile</h2>
+
+<div class="row">
+
+    <div class="col-6">
+        <div class="card text-white bg-dark mb-3" style="padding-left:1em;padding-right:1em;padding-top:1em;padding-bottom:1em;">
+            <div class="row">
+                <div class="card text-white bg-success mb-3" style="margin-left:1em;">
+                    <div class="col-6">
+                        @if (Model.UserModel.Images.Count > 0)
+                        {
+                            <img class="card-img-top" src="@Model.UserModel.Images[0].Url" style="width:18em;" alt="Card image cap">
+                        }
+                    </div>
+                </div>
+                <div class="col-6">
+                    <h5 class="card-title">@Model.UserModel.DisplayName</h5>
+                    <hr />
+                    @Html.DisplayNameFor(model => model.UserModel.Type)
+                    @Html.DisplayFor(model => model.UserModel.Type)
+                    <hr />
+                    <a href="@Model.UserModel.Uri">Profile</a>
+                    <hr />
+                    @Html.DisplayNameFor(model => model.UserModel.Followers)
+                    @Html.DisplayFor(model => model.UserModel.Followers.Total)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div style="height:40em;width:50em;overflow:auto;padding-left:1em; padding-right:1em;">
+            <div class="card text-white bg-dark mb-3" style="padding-left:1em;padding-right:1em;">
+                <h3>@Model.UserModel.DisplayName 's PlayLists </h3>
+                <div class="row">
+                    @foreach (var playList in Model.UserPublicPlayLists)
+                    {
+                        <div class="col-6">
+                            <div class="card text-white bg-success mb-3">
+                                @if (playList.Images.Count > 0)
+                                {
+                                    <img class="card-img-top" src="@playList.Images[0].Url" alt="Card image cap">
+                                }
+                                <div class="card-body">
+                                    <h5 class="card-title"> @Html.ActionLink(
+                                     string.IsNullOrEmpty(playList.Name) ? "Not found" : playList.Name,
+                                     "Index", "PlayList", new
+                                     {playListId = playList.Id,
+                                     tokenTime = Model.Authmodel.TokenTimeGeneration,
+                                     TokenGiven = Model.Authmodel.TokenGiven}, new { }) </h5>
+                                    <hr />
+                                    @Html.ActionLink(playList.Owner.DisplayName, "GetPublicUserProfile", "SpotifyUser", new
+                               {
+                                   userid = playList.Owner.Id,
+                                   tokenTime = Model.Authmodel.TokenTimeGeneration,
+                                   TokenGiven = Model.Authmodel.TokenGiven
+                               }, new { })
+                                    <hr />
+                                    @Html.DisplayNameFor(modelItem => playList.Description) :
+                                    @Html.DisplayFor(modelItem => playList.Description)
+                                    <hr />
+                                    @Html.DisplayNameFor(modelItem => playList.Public) :
+                                    @Html.DisplayFor(modelItem => playList.Public)
+
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

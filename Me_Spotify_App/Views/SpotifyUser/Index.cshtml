@@ -1,0 +1,243 @@
+﻿@model Me_Spotify_App.ViewModels.UserProfileViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="https://cdn.boomcdn.com/libs/owl-carousel/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+<div class="containerContent">
+    <h2 class="text-light text-center display-4">User Profile</h2>
+    <br />
+    <div class="row">
+        <div class="col-6">
+            <div class="card text-white bg-dark mb-3" style="padding-left:1em;padding-right:1em;padding-top:1em;padding-bottom:1em;">
+                <div class="row">
+                    <div class="card text-white bg-success mb-3" style="margin-left:1em;">
+                        <div class="col-6">
+                            @if (Model.UserProfile.Images.Count > 0)
+                            {
+                                <img class="card-img-top" src="@Model.UserProfile.Images[0].Url" style="width:18em;" alt="Card image cap">
+                            }
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <h5 class="card-title">@Model.UserProfile.DisplayName</h5>
+                        @Html.DisplayNameFor(model => model.UserProfile.Country) :
+                        @Html.DisplayFor(model => model.UserProfile.Country)
+                        <hr />
+                        @Html.DisplayNameFor(model => model.UserProfile.Email)
+                        @Html.DisplayFor(model => model.UserProfile.Email)
+                        <hr />
+                        @Html.DisplayNameFor(model => model.UserProfile.Type)
+                        @Html.DisplayFor(model => model.UserProfile.Type)
+                        <hr />
+                        @Html.DisplayNameFor(model => model.UserProfile.Uri)
+                        <a href="@Model.UserProfile.Uri">Profile</a>
+                        <hr />
+                        @Html.DisplayNameFor(model => model.UserProfile.Followers)
+                        @Html.DisplayFor(model => model.UserProfile.Followers.Total)
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-white bg-dark mb-3"
+                 style="padding-left:1em;padding-right:1em;padding-top:1em;padding-bottom:1em;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card text-white bg-success mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Media Player</h5>
+                                @if (Model.CurrentDevices.Devices.Count > 0)
+                                {
+                                    if (Model.CurrentDevices.Devices.Any(d => d.IsActive))
+                                    {
+                                        <div class="col-md-12 text-center">
+
+                                            <a href='@Url.Action("PlayPrevTrack", "SpotifyUser")'>
+                                                <img src='@Url.Content("https://pics.freeicons.io/uploads/icons/png/2088592691556273574-512.png")'
+                                                     width="50" height="50" />
+                                            </a>
+
+                                            <a href='@Url.Action("PauseCurrentTrack", "SpotifyUser")'>
+                                                <img src='@Url.Content("https://pics.freeicons.io/uploads/icons/png/7039751521551938929-512.png")'
+                                                     width="50" height="50" />
+                                            </a>
+
+                                            <a href='@Url.Action("ResumeCurrentTrack", "SpotifyUser")'>
+                                                <img src='@Url.Content("https://pics.freeicons.io/uploads/icons/png/16741343401556273568-512.png")'
+                                                     width="50" height="50" />
+                                            </a>
+
+                                            <a href='@Url.Action("PlayNextTrack", "SpotifyUser")'>
+                                                <img src='@Url.Content("https://pics.freeicons.io/uploads/icons/png/6250981291556273574-512.png")'
+                                                     width="50" height="50" />
+                                            </a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <h2 class="text-danger">No Current Devices Activated</h2>
+                                    }
+                                }
+                                else
+                                {
+                                    <h2 class="text-danger">No Current Devices Available</h2>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-6">
+                        @foreach (var device in Model.CurrentDevices.Devices)
+                        {
+                            <p>Is active: @device.IsActive</p>
+                            <p>Device id: @device.Name</p>
+                            <p>Device type: @device.Type</p>
+                        }
+                    </div>
+                    <div class="col-6">
+                        @if (Model.CurrentlyPlaying != null)
+                        {
+                            <p>Item Name: @Model.CurrentlyPlaying.Item.Name</p>
+                            <p>Is playing? : @Model.CurrentlyPlaying.IsPlaying</p>
+                            <p>Item type: @Model.CurrentlyPlaying.CurrentlyPlayingType</p>
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-6">
+            <div style="height:40em;width:50em;overflow:auto;padding-left:1em; padding-right:1em;">
+                <div class="card text-white bg-dark mb-3" style="padding-left:1em;padding-right:1em;">
+                    <h3 class="display-4 card-header font-weight-lighter bg-dark sticky-top text-center text-light">@Model.UserProfile.DisplayName 's PlayLists </h3>
+                    <div class="row">
+                        @foreach (var playList in Model.UserPlayLists)
+                        {
+                            <div class="col-6">
+                                <div class="card text-white bg-success mb-3">
+                                    @if (playList.Images.Count > 0)
+                                    {
+                                        <img class="card-img-top" src="@playList.Images[0].Url" alt="Card image cap">
+                                    }
+                                    <div class="card-body">
+                                        @Html.ActionLink(
+                                       string.IsNullOrEmpty(playList.Name) ? "Not found" : playList.Name,
+                                            "Index", "PlayList", new
+                                            { playListId = playList.Id }, new { })
+                                        <hr />
+                                        @Html.ActionLink(playList.Owner.DisplayName, "GetPublicUserProfile", "SpotifyUser", new
+                                        { userid = playList.Owner.Id }, new { })
+                                        <hr />
+                                        @Html.DisplayNameFor(modelItem => playList.Description) :
+                                        @Html.DisplayFor(modelItem => playList.Description)
+                                        <hr />
+                                        @Html.DisplayNameFor(modelItem => playList.Public) :
+                                        @Html.DisplayFor(modelItem => playList.Public)
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-12">
+            <h3 class="display-4 card-header font-weight-lighter text-center text-light">Top 20 Tracks</h3>
+            <div class="owl-carousel">
+                @foreach (var tracks in Model.UserTopTracks)
+                {
+                    <div class="card text-white bg-success mb-3">
+                        @if (tracks.Album.Images.Count > 0)
+                        {
+                            <img class="card-img-bottom" style="height:230px;" src="@tracks.Album.Images[0].Url" alt="Card image cap">
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                @Html.ActionLink(tracks.Name, "Details", "Tracks", new
+                                { trackId = tracks.Id }, new { })
+                            </h5>                            
+                        </div>
+                        <div class="card-footer">
+                            @Html.ActionLink("Add to Queue", "AddToQueue", "SpotifyUser", new
+                            { itemUri = tracks.Uri }, new { })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h3 class="display-4 card-header font-weight-lighter sticky-top text-center text-light">Top 20 Artists</h3>
+            <div class="owl-carousel">
+                @foreach (var artist in Model.UserTopArtists)
+                {
+                    <div class="card text-white bg-success mb-3">
+                        @if (artist.Images.Count > 0)
+                        {
+                            <img class="card-img-bottom" style="height:230px;" src="@artist.Images[0].Url" alt="Card image cap">
+                        }
+                        <div class="card-footer">
+                            <h5 class="card-title">
+                                @Html.ActionLink(artist.Name, "Details", "Artist", new
+                                { artistId = artist.Id }, new { })
+                            </h5>
+                            @Html.DisplayNameFor(modelItem => artist.Followers) :
+                            @Html.DisplayFor(modelItem => artist.Followers.Total)
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>
+<style>
+    .owl-nav {
+        text-align: center;
+    }
+</style>
+
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 15,
+        nav: true,
+        autoplay: true,
+        autoplayTimeout: 2000,
+        autoplayHoverPause: true,
+        responsive: {
+            0: {
+                items: 2
+            },
+            600: {
+                items: 4
+            },
+            1000: {
+                items: 6
+            }
+        }
+    })
+</script>
+
+

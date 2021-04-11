@@ -1,0 +1,130 @@
+﻿@model Me_Spotify_App.ViewModels.BrowseViewModel
+
+@{
+    ViewBag.Title = "GetSearchedValues";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="https://cdn.boomcdn.com/libs/owl-carousel/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" type="text/css">
+
+<br />
+<div class="containerContent">
+    <div class="row">
+        <div class="col-12">
+            @{Html.RenderPartial("_SearchBox", Model);}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h5 class="display-4 font-weight text-center text-light">Artists results</h5><br />
+            <div class="d-flex align-items-stretch">
+                @if (Model.SearchResponseModel.Artists != null)
+                {
+                    <div class="owl-carousel">
+                        @foreach (var artist in Model.SearchResponseModel.Artists)
+                        {
+                            <div class="card text-white bg-dark mb-3">
+                                @if (artist.Images.Count > 0)
+                                {
+                                    <img class="card-img-bottom" style="height:230px;" src="@artist.Images[0].Url" alt="Card image cap">
+                                }
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        @Html.ActionLink(artist.Name, "Details", "Artist", new
+                                   { artistId = artist.Id }, new { })
+                                    </h5>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h5 class="display-4 font-weight text-center text-light">Albums results</h5><br />
+            <div class="row">
+                @if (Model.SearchResponseModel.Albums != null)
+                {
+                    <div class="owl-carousel">
+                        @foreach (var album in Model.SearchResponseModel.Albums)
+                        {
+                            <div class="card text-white bg-info mb-3">
+                                @if (album.Images.Count > 0)
+                                {
+                                    <img class="card-img-bottom" style="height:230px;" src="@album.Images[0].Url" alt="Card image cap">
+                                }
+                                <h5 class="card-title">@album.Name</h5>
+                                <div class="card-body">
+                                    @Html.DisplayNameFor(modelItem => album.ReleaseDate) :
+                                    @Html.DisplayFor(modelItem => album.ReleaseDate)
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12">
+            <h5 class="display-4 font-weight text-center text-light">Tracks results</h5><br />
+            @if (Model.SearchResponseModel.Tracks != null)
+            {
+                <div class="owl-carousel">
+                    @foreach (var track in Model.SearchResponseModel.Tracks)
+                    {
+                        <div class="card text-white bg-dark mb-3">
+                            @if (track.Album.Images.Count > 0)
+                            {
+                                <img class="card-img-bottom" style="height:230px;" src="@track.Album.Images[0].Url" alt="Card image cap">
+                            }
+                            <div class="card-footer">
+                                <h5 class="card-text">
+                                    @Html.ActionLink(track.Name, "Details", "Tracks", new
+                                    { trackId = track.Id }, new { })
+                                </h5>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>
+<style>
+    .owl-nav {
+        text-align: center;
+    }
+</style>
+
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 15,
+        nav: true,
+        autoplay: true,
+        autoplayTimeout: 2000,
+        autoplayHoverPause: true,
+        responsive: {
+            0: {
+                items: 2
+            },
+            600: {
+                items: 4
+            },
+            1000: {
+                items: 6
+            }
+        }
+    })
+</script>
