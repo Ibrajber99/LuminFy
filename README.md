@@ -22,10 +22,10 @@ https://johnnycrazy.github.io/SpotifyAPI-NET/docs/next/introduction
  
 ## Sample Images
 
-![Home page](https://user-images.githubusercontent.com/53438581/110303238-8a96dd00-7fd0-11eb-8e4a-9ad06b3ae721.png)
+![Home page](https://user-images.githubusercontent.com/53438581/114309836-02b85d00-9abf-11eb-84c5-1d970b84be90.png)
 
-![image](https://user-images.githubusercontent.com/53438581/110303327-a306f780-7fd0-11eb-9d62-a21795b796c4.png)
+![image](https://user-images.githubusercontent.com/53438581/114309854-11067900-9abf-11eb-9892-5026f141b5c3.png)
 
-![image](https://user-images.githubusercontent.com/53438581/110303389-b619c780-7fd0-11eb-85de-f040f0c158ea.png)
+![image](https://user-images.githubusercontent.com/53438581/114309873-1e236800-9abf-11eb-9c15-6b4301203b2d.png)
 
-![image](https://user-images.githubusercontent.com/53438581/110303473-cd58b500-7fd0-11eb-9512-02af91da0998.png)
+![image](https://user-images.githubusercontent.com/53438581/114309897-33989200-9abf-11eb-9d64-8004fa9b4b07.png)
